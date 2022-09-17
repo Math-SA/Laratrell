@@ -10,10 +10,19 @@ Get the repo <br/>
 -> Clone<br/>
 Setup database info (.env.example provided)<br/>
 -> edit /.env file<br/>
+
+Install node dependencies<br/>
+-> npm install<br/>
+Install jetstream dependencies<br/>
+-> composer require laravel/jetstream<br/>
+
 Create database structure<br/>
 ->php artisan migrate<br/>
 (optional) seed database with test data<br/>
 -->php db:seed<br/>
+
+Generate application key<br/>
+-> php artisan key:generate<br/>
 Run dev script to keep vite building your scripts<br/>
 -> npm run dev <br/>
 Run laravel backend<br/>
