@@ -1,5 +1,9 @@
 <?php
 
+use App\Http\Controllers\TaskListController;
+use App\Http\Controllers\TaskListItemController;
+use App\Http\Controllers\WorkspaceController;
+
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -15,6 +19,10 @@ use Inertia\Inertia;
 |
 */
 
+
+
+
+
 Route::get('/', function () {
     return Inertia::render('Welcome', [
         'canLogin' => Route::has('login'),
@@ -29,7 +37,49 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified',
 ])->group(function () {
-    Route::get('/dashboard', function () {
-        return Inertia::render('Dashboard');
-    })->name('dashboard');
+Route::get('/workspace', [WorkspaceController::class, 'mine'])->name('workspace');
 });
+
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified',
+])->group(function () {
+    Route::put('/workspace-select', [WorkspaceController::class, 'select'])->name('workspace-select.update');
+});
+
+
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified',
+])->group(function () {
+     Route::put('/task_list-move_item', [TaskListController::class, 'move'])->name('task_list-move_item');
+});
+
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified',
+])->group(function () {
+     Route::post('/workspace.create', [WorkspaceController::class, 'create'])->name('workspace.create');
+});
+
+
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified',
+])->group(function () {
+     Route::post('/task_list_item.create', [TaskListItemController::class, 'create'])->name('task_list_item.create');
+});
+
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified',
+])->group(function () {
+     Route::post('/task_list.create', [TaskListController::class, 'create'])->name('task_list.create');
+});
+
+// Route::get('/teste', [TaskListController::class, 'gambiteste'])->name('teste');
