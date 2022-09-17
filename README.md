@@ -6,15 +6,15 @@
 
 
 ##Instructions
-Get the repo
--> Clone
-Setup database info (.env.example provided)
--> edit /.env file
-Create database structure
-->php artisan migrate
-(optional) seed database with test data
--->php db:seed
-Run dev script to keep vite building your scripts
--> npm run dev 
-Run laravel backend
--> php artisan serve
+Get the repo <br/>
+-> Clone<br/>
+Setup database info (.env.example provided)<br/>
+-> edit /.env file<br/>
+Create database structure<br/>
+->php artisan migrate<br/>
+(optional) seed database with test data<br/>
+-->php db:seed<br/>
+Run dev script to keep vite building your scripts<br/>
+-> npm run dev <br/>
+Run laravel backend<br/>
+-> php artisan serve<br/>
