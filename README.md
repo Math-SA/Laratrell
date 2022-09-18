@@ -4,8 +4,14 @@
     (<a href="https://inertiajs.com/" class="underline text-gray-900 dark:text-white">Inertia </a>
     /<a href="https://vuejs.org/" class="underline text-gray-900 dark:text-white">Vue</a>).</p>
 
+##Technologies
+PHP 8.1.6
+Node 16.17.0
+npm 8.2.0
+composer 2.4.2
 
-##Instructions
+
+##Instructions<br/>
 Get the repo <br/>
 -> Clone<br/>
 Setup database info (.env.example provided)<br/>
@@ -14,7 +20,7 @@ Setup database info (.env.example provided)<br/>
 Install node dependencies<br/>
 -> npm install<br/>
 Install jetstream dependencies<br/>
--> composer require laravel/jetstream<br/>
+-> composer install<br/>
 
 Create database structure<br/>
 ->php artisan migrate<br/>
