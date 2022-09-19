@@ -1,4 +1,4 @@
-* text eol=lf=auto
+* text eol=lf
 
 *.blade.php diff=html
 *.css diff=css
