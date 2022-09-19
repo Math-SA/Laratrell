@@ -1,0 +1,43 @@
+services: 
+
+  db:
+    container_name: laratrell_db
+    image: mysql:8.0.30
+    command: '--default-authentication-plugin=mysql_native_password'
+    volumes:
+      - laratrell:/db
+    environment:
+      - MYSQL_DATABASE=laratrell
+      - MYSQL_USER=laratrell
+      - MYSQL_PASSWORD=devplay
+      - MYSQL_ROOT_PASSWORD=devplay_root
+    ports:
+      - '3306:3306'
+      - '33060:33060'
+
+  web:
+    container_name: laratrell_web
+    build: .
+    environment:
+      - docker=true
+      - DB_CONNECTION=mysql
+      - DB_HOST=laratrell_db
+      - DB_PORT=3306
+      - DB_DATABASE=laratrell
+      - DB_USERNAME=laratrell
+      - DB_PASSWORD=devplay
+    ports: 
+      - '8000:8000'
+    depends_on: 
+     - db
+    volumes:
+      - modules:/app/node_modules:rw
+      - vendor:/app/vendor:rw
+      - type: bind
+        source: .
+        target: /app
+volumes:
+  laratrell:
+  modules:
+  vendor:
+
