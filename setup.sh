@@ -1,4 +1,5 @@
 #!/bin/sh
-cp .env.example .envnpm run build
+cp .env.example .env
+npm run build
 php artisan key:generate
 php artisan migrate
