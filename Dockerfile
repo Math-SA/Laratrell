@@ -7,9 +7,6 @@ RUN rm nodesource_setup.sh
 WORKDIR /app
 COPY . .
 RUN npm install
-RUN npm run build
-RUN cp ./.env.example ./.env
 RUN composer install
-RUN php artisan key:generate
 
 EXPOSE 8000
