@@ -3,23 +3,28 @@ import { Inertia } from '@inertiajs/inertia';
 import { inject, ref} from 'vue';
 
 const drop = ev =>{
-    var data = JSON.parse(event.dataTransfer.getData("laratrell/taskItemId"));
-    if(isNaN(data.task_list_id)){
+    var data = event.dataTransfer.getData("laratrell/taskItemId");
+    if (data){
+        data = JSON.parse(data);
+    }
+
+    if(data === undefined || data.task === undefined){
+        data = event.dataTransfer.getData("laratrell/taskListId");
         deleteList(data);
     } else{
-        deleteListItem(data);
+        deleteListItem(data.task.id);
     }
 }
 
 const deleteList = data => {
-    Inertia.delete(`task_list.delete/${data.id}`, {
-    onBefore: () => confirm('Are you sure you want to delete this list?'),
+    Inertia.delete(`task_list.delete/${data}`, {
+        onBefore: () => confirm('Are you sure you want to delete this list?'),
     });        
 }
 
 
 const deleteListItem = data =>{
-    Inertia.delete(`task_list_item.delete/${data.id}`);        
+    Inertia.delete(`task_list_item.delete/${data}`);        
 }
 
 </script>

@@ -11,7 +11,7 @@ class TaskListItemController extends Controller
     //
     public function create(Request $request){
         $taskListId = $request->input('taskListId');
-        $taskList = TaskList::where('id','=',$taskListId)->with('workspace')->get()->first();
+        $taskList = TaskList::where('id','=', $taskListId)->with('workspace')->get()->first();
         if ($taskList && $taskList->workspace->user_id == auth()->id()){
             $task = TaskListItem::make();
             $task->task_list_id = $taskListId;

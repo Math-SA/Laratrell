@@ -66,4 +66,11 @@ class TaskListController extends Controller
             $taskList->save();
         }
     }
+
+    public function delete(Request $request){
+        $list = TaskList::findOrFail($request->id);
+        if (auth()->id() == $list->workspace()->sole()->user_id){
+            $list->delete();
+        };
+    }
 }

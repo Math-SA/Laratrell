@@ -19,6 +19,8 @@ const creatingTaskList = ref(false);
 provide('creatingTaskList', creatingTaskList);
 const dragging = ref(false);
 provide('dragging', dragging);
+const draggingList = ref(false);
+provide('draggingList', dragging);
 
 </script>
 
@@ -41,7 +43,7 @@ provide('dragging', dragging);
             <div class="w-28 flex bg-white" :class="{hidden: !dragging}">
                 <DeleteItemArea></DeleteItemArea>
             </div>
-            <TaskList v-for="taskList in props.selectedWorkspace.task_lists" :taskList="taskList"></TaskList>
+            <TaskList v-if="props.selectedWorkspace" v-for="taskList in props.selectedWorkspace.task_lists" :taskList="taskList"></TaskList>
         </div>
         
        
