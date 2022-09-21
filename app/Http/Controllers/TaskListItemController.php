@@ -22,4 +22,11 @@ class TaskListItemController extends Controller
         }
     }
 
+    public function delete(Request $request){
+        $item = TaskListItem::findOrFail($request->id);
+        if (auth()->id() == $item->taskList->workspace()->sole()->user_id){
+            $item->delete();
+        };
+    }
+
 }

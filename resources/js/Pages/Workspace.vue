@@ -4,6 +4,7 @@ import TaskList from '@/Components/TaskList.vue';
 import Inertia from '@inertiajs/inertia-vue3';
 import { ref, provide } from 'vue';
 import TaskListCreate from '@/Components/TaskListCreate.vue';
+import DeleteItemArea from '@/Components/DeleteItemArea.vue';
 
 import WorkspaceSelector from '@/Components/WorkspaceSelector.vue';
 
@@ -16,6 +17,8 @@ const props = defineProps({
 
 const creatingTaskList = ref(false);
 provide('creatingTaskList', creatingTaskList);
+const dragging = ref(false);
+provide('dragging', dragging);
 
 </script>
 
@@ -30,12 +33,17 @@ provide('creatingTaskList', creatingTaskList);
                 </button>
                 <TaskListCreate v-if="selectedWorkspace" :workspaceId="props.selectedWorkspace.id"></TaskListCreate>
             </div>
+
             
         </template>
+
         <div class="px-2 py-2 w-full flex flew-row gap-x-8 bg-[#6875F5]">
-            
+            <div class="w-28 flex bg-white" :class="{hidden: !dragging}">
+                <DeleteItemArea></DeleteItemArea>
+            </div>
             <TaskList v-for="taskList in props.selectedWorkspace.task_lists" :taskList="taskList"></TaskList>
         </div>
+        
        
     </AppLayout>
 </template>
