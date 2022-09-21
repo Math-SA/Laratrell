@@ -12,4 +12,8 @@ class Workspace extends Model
     public function size(){
         return $this->hasMany('App\Models\TaskList')->count();
     }
+
+    public function taskLists(){
+        return $this->hasMany('App\Models\TaskList');
+    }
 }

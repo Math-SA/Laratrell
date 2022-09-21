@@ -11,9 +11,8 @@ import WorkspaceSelector from '@/Components/WorkspaceSelector.vue';
 const props = defineProps({
         workspaces:{type:Array, default:[]}, 
         selectedWorkspace: {type:Object, default:null},
-        taskLists: {type:Array, default:null}
+        taskLists: {type: Array, default: []}
 });
-
 
 const creatingTaskList = ref(false);
 provide('creatingTaskList', creatingTaskList);
@@ -34,7 +33,8 @@ provide('creatingTaskList', creatingTaskList);
             
         </template>
         <div class="px-2 py-2 w-full flex flew-row gap-x-8 bg-[#6875F5]">
-            <TaskList v-for="taskList in $page.props.taskLists" :taskList="taskList"></TaskList>
+            
+            <TaskList v-for="taskList in props.selectedWorkspace.task_lists" :taskList="taskList"></TaskList>
         </div>
        
     </AppLayout>

@@ -61,5 +61,12 @@ class User extends Authenticatable
         'profile_photo_url',
     ];
 
+    public function selectedWorkspace(){
+        return $this->belongsTo('App\Models\Workspace');
+    }
+
+    public function workspaces(){
+        return $this->hasMany('App\Models\Workspace');
+    }
 
 }

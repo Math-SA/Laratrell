@@ -12,23 +12,19 @@ use Inertia\Inertia;
 
 class WorkspaceController extends Controller
 {
-    //
 
     public function index(){
         return Workspace::all();
     }
     
-    public function mine(){
-        $selectedWorkspace = Workspace::find(User::find(auth()->id())->selected_workspace_id);
+    public function userSelectedWorkspace(){
+        $user = auth()->user()->load('selectedWorkspace.taskLists.tasks');
+        $selectedWorkspace = $user->selectedWorkspace;
         if ($selectedWorkspace != null){
-            $taskLists =  TaskList::where('workspace_id', $selectedWorkspace->id)->get();
-            foreach ($taskLists as $taskList){
-                $taskList->tasks = TaskListItem::where('task_list_id', $taskList->id)->orderBy('order')->get();
-            }
             return Inertia::render('Workspace', [
-                'workspaces' => Workspace::where('user_id', auth()->id())->get(),
-                'selectedWorkspace' => $selectedWorkspace,
-                'taskLists' => $taskLists
+                'workspaces' => $user->workspaces,
+                'selectedWorkspace' =>  $selectedWorkspace,
+                'taskLists' => $selectedWorkspace->taskLists
             ]);
         }else{
             return Inertia::render('Workspace', [

@@ -10,12 +10,17 @@ import { ref, provide } from 'vue';
             selectedWorkspace: {type:Object, default:null}});
     const switchWorkspace = (workspace) => {
         Inertia.put(route('workspace-select.update'), {
+            //data
             workspace_id: workspace.id,
         }, {
+            //other options
             preserveState: false,
             preserveScroll: false,
+            onSuccess: ()=>{
+                Inertia.reload();
+            }
         });
-        Inertia.reload();
+        
     };
 
     const creating = ref (false);

@@ -17,5 +17,13 @@ class TaskList extends Model
         return $this->hasMany('App\Models\TaskListItem')->count();
     }
 
+    public function taskListItems(){
+        return $this->hasMany('App\Models\TaskListItem')->orderBy('order');
+    }
+
+    public function tasks(){
+        return $this->taskListItems();
+    }
+
     
 }

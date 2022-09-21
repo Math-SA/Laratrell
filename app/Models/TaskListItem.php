@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class TaskListItem extends Model
 {
     use HasFactory;
+
+    public function taskList(){
+        return $this->belongsTo('App\Models\TaskList');
+    }
 }

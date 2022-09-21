@@ -37,7 +37,7 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified',
 ])->group(function () {
-Route::get('/workspace', [WorkspaceController::class, 'mine'])->name('workspace');
+Route::get('/workspace', [WorkspaceController::class, 'userSelectedWorkspace'])->name('workspace');
 });
 
 Route::middleware([
