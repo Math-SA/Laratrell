@@ -10,6 +10,7 @@ import TextInput from '@/Components/TextInput.vue';
 
 defineProps({
     canResetPassword: Boolean,
+    canRegister: {tyep:Boolean, default: true},
     status: String,
 });
 
@@ -30,7 +31,25 @@ const submit = () => {
 </script>
 
 <template>
-    <Head title="Log in" />
+<AppLayout title="User Login">
+    <template #header>
+        <Head title="Log in" />
+    </template>
+        <div class="hidden fixed w-1/4  top-0 right-0 px-6 py-4 sm:block">
+            <Link v-if="$page.props.user" :href="route('workspace')" class="text-sm text-gray-700 dark:text-gray-500 underline">Workspace</Link>
+
+            <template v-else>
+                <div class="flex flex-col-2 justify-between">
+                    <div class="animate-ping px-16 max-w-xs">></div>
+                    <div>
+                        <Link :href="route('login')" class="text-sm text-gray-700 dark:text-gray-500 underline">Log in</Link>
+
+                        <Link v-if="canRegister" :href="route('register')" class="ml-4 text-sm text-gray-700 dark:text-gray-500 underline">Register</Link>
+                    </div>
+                </div>
+                
+            </template>
+        </div>
 
     <AuthenticationCard>
         <template #logo>
@@ -86,4 +105,5 @@ const submit = () => {
             </div>
         </form>
     </AuthenticationCard>
+</AppLayout>
 </template>

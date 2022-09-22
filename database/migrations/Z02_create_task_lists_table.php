@@ -13,11 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('task_list_items', function (Blueprint $table) {
+        Schema::enableForeignKeyConstraints();
+        Schema::create('task_lists', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('task_list_id')->index();
             $table->string('name');
-            $table->longText('description')->nullable();
+            $table->foreignId('workspace_id')
+                ->references('id')->on('workspaces')
+                ->onDelete('cascade')
+                ->constrained();
             $table->integer('order');
             $table->timestamps();
         });
@@ -30,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('task_list_items');
+        Schema::dropIfExists('task_lists');
     }
 };

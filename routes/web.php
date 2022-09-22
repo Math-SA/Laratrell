@@ -74,6 +74,17 @@ Route::middleware([
      Route::post('/task_list_item.create', [TaskListItemController::class, 'create'])->name('task_list_item.create');
 });
 
+
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified',
+])->group(function () {
+     Route::delete('/task_list_item.delete/{id}', [TaskListItemController::class, 'delete'])->name('task_list_item.delete');
+});
+
+
+
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
@@ -82,4 +93,10 @@ Route::middleware([
      Route::post('/task_list.create', [TaskListController::class, 'create'])->name('task_list.create');
 });
 
-// Route::get('/teste', [TaskListController::class, 'gambiteste'])->name('teste');
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified',
+])->group(function () {
+     Route::delete('/task_list.delete/{id}', [TaskListController::class, 'delete'])->name('task_list.delete');
+});
